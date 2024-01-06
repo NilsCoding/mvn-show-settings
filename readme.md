@@ -20,7 +20,7 @@ To execute the Mojo in your build process, it needs to be configured in the `bui
 <plugin>
     <groupId>io.github.nilscoding.maven</groupId>
     <artifactId>mvn-show-settings</artifactId>
-    <version>1.0.0</version>
+    <version>1.1.0</version>
     <executions>
         <execution>
             <phase>generate-sources</phase>
