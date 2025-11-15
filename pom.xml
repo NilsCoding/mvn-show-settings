@@ -3,7 +3,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>io.github.nilscoding.maven</groupId>
     <artifactId>mvn-show-settings</artifactId>
-    <version>1.1.0</version>
+    <version>1.1.1</version>
     <packaging>maven-plugin</packaging>
 
     <name>mvn-show-settings</name>
@@ -15,8 +15,8 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>${java.version}</maven.compiler.source>
         <maven.compiler.target>${java.version}</maven.compiler.target>
-        <mavenversion>3.6.0</mavenversion>
-        <mavenpluginhelperversion>3.10.2</mavenpluginhelperversion>
+        <mavenversion>3.8.1</mavenversion>
+        <mavenpluginhelperversion>3.15.2</mavenpluginhelperversion>
     </properties>
 
     <licenses>
@@ -60,7 +60,7 @@
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-deploy-plugin</artifactId>
-                    <version>3.1.1</version>
+                    <version>3.1.4</version>
                 </plugin>
             </plugins>
         </pluginManagement>
@@ -68,7 +68,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-enforcer-plugin</artifactId>
-                <version>3.4.1</version>
+                <version>3.6.2</version>
                 <executions>
                     <execution>
                         <id>enforce-maven</id>
@@ -88,7 +88,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.12.1</version>
+                <version>3.14.1</version>
                 <configuration>
                     <compilerArgs>
                         <!--<arg>-verbose</arg>-->
@@ -99,7 +99,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-source-plugin</artifactId>
-                <version>3.3.0</version>
+                <version>3.3.1</version>
                 <executions>
                     <execution>
                         <id>attach-sources</id>
@@ -112,7 +112,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-javadoc-plugin</artifactId>
-                <version>3.6.3</version>
+                <version>3.12.0</version>
                 <executions>
                     <execution>
                         <id>attach-javadocs</id>
@@ -122,30 +122,10 @@
                     </execution>
                 </executions>
             </plugin>
-            <!--
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-gpg-plugin</artifactId>
-                <version>3.1.0</version>
-                <executions>
-                    <execution>
-                        <id>sign-artifacts</id>
-                        <phase>verify</phase>
-                        <goals>
-                            <goal>sign</goal>
-                        </goals>
-                        <configuration>
-                            <keyname>${gpg.keyname}</keyname>
-                            <passphraseServerId>${gpg.passphraseServerId}</passphraseServerId>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
-            -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-checkstyle-plugin</artifactId>
-                <version>3.3.1</version>
+                <version>3.6.0</version>
                 <executions>
                     <execution>
                         <goals>
@@ -157,20 +137,36 @@
                     <configLocation>mvn-show-settings-checkstyle.xml</configLocation>
                     <failOnViolation>false</failOnViolation>
                     <failsOnError>false</failsOnError>
-                    <sourceDirectories>
-                        <sourceDirectory>${project.build.sourceDirectory}</sourceDirectory>
-                    </sourceDirectories>
+                    <excludeGeneratedSources>true</excludeGeneratedSources>
+<!--                    <sourceDirectories>-->
+<!--                        <sourceDirectory>${project.build.sourceDirectory}</sourceDirectory>-->
+<!--                    </sourceDirectories>-->
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>versions-maven-plugin</artifactId>
+                <version>2.19.1</version>
+                <configuration>
+                    <ruleSet>
+                        <ignoreVersions>
+                            <ignoreVersion>
+                                <type>regex</type>
+                                <version>(?i).*-(alpha|beta|m|rc)([-.]?\d+)?</version>
+                            </ignoreVersion>
+                        </ignoreVersions>
+                    </ruleSet>
                 </configuration>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-project-info-reports-plugin</artifactId>
-                <version>3.5.0</version>
+                <version>3.9.0</version>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-site-plugin</artifactId>
-                <version>3.12.1</version>
+                <version>3.21.0</version>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -193,6 +189,7 @@
                     </execution>
                 </executions>
                 <configuration>
+                    <goalPrefix>showsettings</goalPrefix>
                     <helpPackageName>io.github.nilscoding.maven.showsettings.helpmojo</helpPackageName>
                 </configuration>
             </plugin>
@@ -204,12 +201,13 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-checkstyle-plugin</artifactId>
-                <version>3.3.1</version>
+                <version>3.6.0</version>
                 <configuration>
                     <configLocation>mvn-show-settings-checkstyle.xml</configLocation>
-                    <sourceDirectories>
-                        <sourceDirectory>${project.build.sourceDirectory}</sourceDirectory>
-                    </sourceDirectories>
+                    <excludeGeneratedSources>true</excludeGeneratedSources>
+<!--                    <sourceDirectories>-->
+<!--                        <sourceDirectory>${project.build.sourceDirectory}</sourceDirectory>-->
+<!--                    </sourceDirectories>-->
                 </configuration>
             </plugin>
         </plugins>
